@@ -1,0 +1,26 @@
+import pandas as pd
+from matplotlib import pyplot as plt
+import numpy as np
+import seaborn as sns
+from matplotlib.ticker import FuncFormatter
+
+path = "C:/Users/richw/Documents/Data Science/Trade Data/"
+filename = path + 'comtrade.csv'
+df = pd.read_csv (filename)
+
+dx = df.copy()
+dx ['Year']
+dx1 = dx.groupby(['Year']).agg({'Trade Value (US$)':['sum']}).reset_index()
+dx1.columns = (['Year','TradeValue'])
+
+plt.subplots(figsize=(20,12))
+
+plt.plot(dx1.Year, dx1.TradeValue,  color = 'darkslategrey', linewidth = 4, label = 'Trade Value (US$)' )
+
+plt.xlabel ("Year", fontsize = 12) # change to be just a year
+plt.ylabel ("Trade Value by Year (US$)", fontsize = 12) # format to be dollars
+plt.title ("Apparel & Textile Trade Value past 5 years" ,fontsize = 16)
+
+plt.legend()
+
+plt.show()
